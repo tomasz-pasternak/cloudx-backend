@@ -1,36 +1,22 @@
-'use strict';
+import data from "./productList.json";
 
-module.exports.getProductsList = async (event) => {
+export const getProductsList = async (event) => {
   return {
     statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'Go Serverless v1.0! Your function executed successfully!',
-        input: event,
-      },
-      null,
-      2
-    ),
+    body: JSON.stringify(data, null, 2),
   };
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
 };
 
-module.exports.getProductsById = async (event) => {
-  console.log("byid", event);
+export const getProductsById = async (event) => {
+  const productId = event?.pathParameters?.productId;
+
+  console.log("byid", productId);
+
+  const results = data.filter((item) => item.id === productId);
+  const respone = results.length >= 1 ? results[0] : {};
+
   return {
     statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'By id',
-        input: event,
-      },
-      null,
-      2
-    ),
+    body: JSON.stringify(respone, null, 2),
   };
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
 };
