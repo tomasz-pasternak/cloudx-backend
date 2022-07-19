@@ -2,7 +2,7 @@
   "name": "product-service",
   "version": "1.0.0",
   "description": "",
-  "main": "handler.js",
+  "main": "index.js",
   "dependencies": {
     "esbuild": "^0.14.49",
     "serverless-esbuild": "^1.32.0"
