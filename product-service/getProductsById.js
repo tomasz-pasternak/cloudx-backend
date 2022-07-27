@@ -1,15 +1,16 @@
-import data from "./productList.json";
+import { getProductById } from "./services/productService";
 
 export const handler = async (event) => {
   const productId = event?.pathParameters?.productId;
-  const results = data.filter((item) => item.id === productId);
-  const respone = results.length >= 1 ? results[0] : {};
+
+  const results = await getProductById(productId);
+  const response = results.length >= 1 ? results[0] : {};
 
   return {
     statusCode: 200,
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(respone, null, 2),
+    body: JSON.stringify(response, null, 2),
   };
 };
